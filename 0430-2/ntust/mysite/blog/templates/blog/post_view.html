@@ -104,7 +104,7 @@
 
       <div class="row mainDiv">
         <div class="col-md-12">
-              
+              <form action="" method="GET" novalidate="novalidate">
               {% for post in posts %}
               <p class="title">{{ post.title }}<font class="user">By.{{ post.author }}</font></p>
               <div class="div_text">{{ post.text|linebreaksbr }}</div>
@@ -124,9 +124,9 @@
               <p>No comments are available.</p>
               {% endif %}
               <br><br><br>
-              
+              </form>
               <h1>留言區</h1>
-              <form action="" method="POST" novalidate="novalidate">
+              <form action="{{ pid }}/post_comment/" method="POST" novalidate="novalidate">
 
               <h5><label for="c_title">標題:</label></h5>
               <input id="c_title" type="text" name="c_title">

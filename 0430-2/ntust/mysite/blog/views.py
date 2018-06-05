@@ -30,15 +30,20 @@ def view(request):
     # try:
     pid=request.GET["id"]
     posts = Post.objects.filter(p_id = pid)
-    latest_cards_list = Cards.objects.all()
-    c_title =request.POST.get('c_title')
-    c_user_name = request.POST.get('c_user_name')
-    c_content = request.POST.get('c_content')
+    latest_cards_list = Cards.objects.filter(post = pid)
+
+    return render(request, 'blog/post_view.html', {'posts': posts,'latest_cards_list':latest_cards_list,'pid':pid})
+
+def post_comment(request,p_id):
+    pid=p_id
+    c_title =request.POST['c_title']
+    c_user_name = request.POST['c_user_name']
+    c_content = request.POST['c_content']
     c_pub_date = datetime.datetime.now()
     cards = models.Cards(title=c_title,user_name=c_user_name,content=c_content,pub_date=c_pub_date,post=pid)
     cards.save()
+    return HttpResponseRedirect('/blog/view/?id=%s'%pid)
 
-    return render(request, 'blog/post_view.html', {'posts': posts,'latest_cards_list':latest_cards_list})
     # except:
     #     return HttpResponseRedirect('/blog/')
 

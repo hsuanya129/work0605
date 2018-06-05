@@ -36,7 +36,7 @@ class Cards(models.Model):
     user_name = models.CharField(max_length=200)
     content = models.TextField(blank=True)
     pub_date = models.DateTimeField(default=timezone.now)
-    post = models.CharField(max_length =200)
+    post = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
