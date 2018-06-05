@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from .models import Post,Category
+from .models import Post,Category,Cards
 from . import models
 import datetime
 
@@ -20,6 +20,29 @@ def post_list(request):
     categories = Category.objects.all()
     return render(request, 'blog/post_list.html', {'posts': posts, 'categories': categories})
 
+def category(request):
+    pid=request.GET["id"]
+    posts = Post.objects.filter(category=pid)
+    categories = Category.objects.all()
+    return render(request, 'blog/post_category.html', {'posts': posts,'categories':categories})
+
+def view(request):
+    # try:
+    pid=request.GET["id"]
+    posts = Post.objects.filter(p_id = pid)
+    latest_cards_list = Cards.objects.all()
+    c_title =request.POST.get('c_title')
+    c_user_name = request.POST.get('c_user_name')
+    c_content = request.POST.get('c_content')
+    c_pub_date = datetime.datetime.now()
+    cards = models.Cards(title=c_title,user_name=c_user_name,content=c_content,pub_date=c_pub_date,post=pid)
+    cards.save()
+
+    return render(request, 'blog/post_view.html', {'posts': posts,'latest_cards_list':latest_cards_list})
+    # except:
+    #     return HttpResponseRedirect('/blog/')
+
+
 def post_page(request):
 	return render_to_response('blog/post_new.html')
 
@@ -28,19 +51,6 @@ def edit_page(request):
 		pid=request.GET["id"]
 		posts = Post.objects.filter(p_id = pid)
 		return render(request, 'blog/post_edit.html', {'posts': posts})
-	except:
-		return HttpResponseRedirect('/blog/')
-
-def view(request):
-	try:
-		pid=request.GET["id"]
-		posts = Post.objects.filter(p_id = pid)
-		title= ""
-
-		for post in posts:
-			title = post.title
-
-		return render(request, 'blog/post_view.html', {'posts': posts, 'title': title})
 	except:
 		return HttpResponseRedirect('/blog/')
 		
@@ -83,12 +93,4 @@ def delete(request):
 
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
-
-def category(request):
-    pid=request.GET["id"]
-    posts = Post.objects.filter(category=pid)
-    return render(request, 'blog/post_category.html', {'posts': posts})
 

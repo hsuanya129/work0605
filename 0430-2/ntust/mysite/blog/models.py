@@ -1,6 +1,5 @@
 
 from __future__ import unicode_literals
-
 from django.db import models
 from django.utils import timezone
 class Category(models.Model):
@@ -31,6 +30,17 @@ class Post(models.Model):
 
     def __str__(self):
         return  str(self.p_id) + "." + self.title
+
+class Cards(models.Model):
+    title = models.CharField(max_length =200)
+    user_name = models.CharField(max_length=200)
+    content = models.TextField(blank=True)
+    pub_date = models.DateTimeField(default=timezone.now)
+    post = models.CharField(max_length =200)
+
+    def __str__(self):
+        return self.title
+
 
 
 
