@@ -31,7 +31,7 @@ class Post(models.Model):
     def __str__(self):
         return  str(self.p_id) + "." + self.title
 
-class Cards(models.Model):
+class Comment(models.Model):
     title = models.CharField(max_length =200)
     user_name = models.CharField(max_length=200)
     content = models.TextField(blank=True)

@@ -86,8 +86,8 @@
                   </tr>
                   <tr>
                     <td colspan="2" style="padding-top: 10px;">
-                      {{ post.text|slice:"0:100"  }}...<hr style="margin-bottom: 6px;">
-                      <div style="text-align: right;" class="link"><a href="/blog/edit/?id={{ post.p_id }}">編輯</a> | <a href="/blog/delete/?id={{ post.p_id }}">刪除</a></div>
+                      {{ post.text|slice:"0:100"}}...<a href="/blog/view/?id={{ post.p_id }}">繼續瀏覽</a><hr style="margin-bottom: 6px;">
+                      <div style="text-align: right;" class="link"><a href="/blog/category/?id={{ post.category.c_id }}">同類型文章</a> |<a href="/blog/edit/?id={{ post.p_id }}">編輯</a> | <a href="/blog/delete/?id={{ post.p_id }}">刪除</a></div>
                     </td>
                   </tr>
                 </table>

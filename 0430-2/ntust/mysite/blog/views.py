@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from .models import Post,Category,Cards
+from .models import Post,Category,Comment
 from . import models
 import datetime
 
@@ -30,7 +30,7 @@ def view(request):
     # try:
     pid=request.GET["id"]
     posts = Post.objects.filter(p_id = pid)
-    latest_cards_list = Cards.objects.filter(post = pid)
+    latest_cards_list = Comment.objects.filter(post = pid)
 
     return render(request, 'blog/post_view.html', {'posts': posts,'latest_cards_list':latest_cards_list,'pid':pid})
 
@@ -40,7 +40,7 @@ def post_comment(request,p_id):
     c_user_name = request.POST['c_user_name']
     c_content = request.POST['c_content']
     c_pub_date = datetime.datetime.now()
-    cards = models.Cards(title=c_title,user_name=c_user_name,content=c_content,pub_date=c_pub_date,post=pid)
+    cards = models.Comment(title=c_title,user_name=c_user_name,content=c_content,pub_date=c_pub_date,post=pid)
     cards.save()
     return HttpResponseRedirect('/blog/view/?id=%s'%pid)
 
