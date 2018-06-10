@@ -12,4 +12,4 @@ urlpatterns = [
     url(r'^view/(?P<p_id>[0-9]+)/post_comment/$', views.post_comment, name='post_comment'), 
     url(r'^about/$', views.about, name='about'), 
     ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += staticfiles_urlpatterns()

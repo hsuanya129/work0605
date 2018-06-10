@@ -461,6 +461,7 @@ i.glyphicon.glyphicon-comment {
     background: #000;
 }
 .bht1 {
+    font-family: '微軟正黑體'
     float: left;
     padding-top: 1em;
 }
@@ -581,7 +582,7 @@ i.glyphicon.glyphicon-comment {
     width: 30%;
 }
 .technology-left{
-	width:70%;
+	width:100%;
 	padding:0;
 }
 .blog-grids {
@@ -983,7 +984,8 @@ img.zoom-img:hover{
     margin-right:100px;
     margin-left:100px;
     float:right;
-    width:30%;
+    width:35%;
+    height:35%;
     padding:.5em;
     border:2px solid #aaa;
 }

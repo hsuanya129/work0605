@@ -18,7 +18,7 @@ def index(request):
 
 def category(request):
     pid=request.GET["id"]
-    posts = Post.objects.filter(category=pid)
+    posts = Post.objects.filter(category=pid).order_by('-published_date')
     categories = Category.objects.all()
     return render(request, 'blog/category.html', {'posts': posts,'categories':categories})
 
